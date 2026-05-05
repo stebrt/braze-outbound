@@ -5,7 +5,7 @@ module.exports = async function handler(req, res) {
 
   try {
     // ── Step 1: Notizie rilevanti con web search ────────────────────────────
-    const newsResponse = await callAnthropic({ model: 'claude-haiku-4-5-20251001',
+    const newsResponse = await callAnthropic({ model: 'claude-sonnet-4-5',
       system: 'Sei un ricercatore specializzato in customer experience e marketing digitale. Rispondi SOLO con JSON valido, zero testo extra.',
       prompt: `Cerca notizie e informazioni recenti su ${account.name} (${account.website}) focalizzandoti su:
 - Strategie di customer experience, CX, customer engagement
@@ -45,7 +45,7 @@ Rispondi con:
     let profileCost = 0;
 
     if (hasProfile) {
-      const profileResponse = await callAnthropic({ model: 'claude-haiku-4-5-20251001',
+      const profileResponse = await callAnthropic({ model: 'claude-sonnet-4-5',
         system: 'Sei un esperto di sales intelligence. Rispondi SOLO con JSON valido, zero testo extra.',
         prompt: `Analizza questo profilo LinkedIn e estrai le informazioni rilevanti per un outbound sales B2B.
 
