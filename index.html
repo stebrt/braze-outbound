@@ -1,34 +1,873 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="it">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    body {background-color: #090b0e}
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #dbe5f1; -webkit-text-stroke: #dbe5f1}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #2f425d; -webkit-text-stroke: #2f425d}
-    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 12.0px 'Helvetica Neue'; color: #6780a0; -webkit-text-stroke: #6780a0}
-    p.p5 {margin: 0.0px 0.0px 4.0px 0.0px; font: 10.0px 'Helvetica Neue'; color: #2f425d; -webkit-text-stroke: #2f425d}
-    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #dbe5f1; -webkit-text-stroke: #dbe5f1; min-height: 15.0px}
-    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 32.0px 'Helvetica Neue'; color: #2f425d; -webkit-text-stroke: #2f425d}
-    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; font: 13.0px 'Helvetica Neue'; color: #2f425d; -webkit-text-stroke: #2f425d}
-    span.s1 {font-kerning: none; background-color: #090b0e}
-    span.s2 {font: 12.0px Menlo; font-kerning: none; background-color: #090b0e}
-    span.s3 {font-kerning: none}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Braze Outbound — Italia</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #080C10;
+  --surface: #0E1520;
+  --surface2: #131D2E;
+  --border: #1C2A3F;
+  --border2: #243348;
+  --text: #E2EAF4;
+  --text2: #7A93B0;
+  --text3: #3D5470;
+  --accent: #F97316;
+  --accent2: #FB923C;
+  --green: #22C55E;
+  --green-bg: #052E16;
+  --amber: #F59E0B;
+  --amber-bg: #451A03;
+  --slate: #94A3B8;
+  --slate-bg: #1E293B;
+  --red: #EF4444;
+  --red-bg: #1C0000;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+input, textarea, button, select { font-family: inherit; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+.fadeUp { animation: fadeUp 0.35s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* ── Header ── */
+#header {
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+#logo { display: flex; align-items: center; gap: 10px; }
+#logo-mark {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; color: white;
+  box-shadow: 0 0 16px rgba(249,115,22,0.3);
+}
+#logo-name { font-weight: 600; font-size: 14px; letter-spacing: -0.02em; }
+#logo-tag { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; margin-left: 2px; }
+#header-right { display: flex; align-items: center; gap: 12px; }
+#session-cost { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; display: none; }
+#btn-settings {
+  background: transparent; border: 1px solid var(--border);
+  border-radius: 6px; padding: 5px 12px; font-size: 12px;
+  color: var(--text2); cursor: pointer; transition: all 0.15s;
+}
+#btn-settings:hover { border-color: var(--border2); color: var(--text); }
+
+/* ── Settings panel ── */
+#settings-panel {
+  display: none;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+}
+#settings-label { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing: 0.06em; margin-bottom: 12px; }
+#competitor-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; min-height: 10px; }
+.comp-tag {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 20px; padding: 3px 10px 3px 12px;
+  font-size: 12px; display: flex; align-items: center; gap: 6px;
+}
+.comp-name { color: var(--text2); }
+.comp-arrow { color: var(--text3); }
+.comp-val { color: var(--accent); }
+.comp-del { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 13px; line-height: 1; padding: 0 2px; }
+.comp-del:hover { color: var(--red); }
+#comp-form { display: flex; gap: 8px; }
+.settings-input {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; padding: 7px 12px; font-size: 13px;
+  color: var(--text); outline: none; transition: border 0.15s;
+}
+.settings-input:focus { border-color: var(--accent); }
+#comp-key { flex: 2; }
+#comp-val-input { flex: 1; }
+#btn-add-comp {
+  background: var(--accent); border: none; border-radius: 6px;
+  padding: 7px 16px; font-size: 13px; color: #fff;
+  cursor: pointer; font-weight: 500;
+}
+
+/* ── Layout ── */
+#layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  min-height: calc(100vh - 52px);
+}
+
+/* ── Sidebar ── */
+#sidebar {
+  border-right: 1px solid var(--border);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  max-height: calc(100vh - 52px);
+  position: sticky;
+  top: 52px;
+}
+#search-label { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; padding: 0 4px; margin-bottom: 4px; }
+#search-wrap { position: relative; margin-bottom: 4px; }
+#search-input {
+  width: 100%; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 9px 32px 9px 12px; font-size: 13px;
+  color: var(--text); outline: none; transition: border 0.15s;
+}
+#search-input:focus { border-color: var(--accent); }
+#search-input::placeholder { color: var(--text3); }
+#btn-clear {
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%); background: none; border: none;
+  color: var(--text3); cursor: pointer; font-size: 16px;
+  display: none; line-height: 1;
+}
+#account-list { display: flex; flex-direction: column; gap: 2px; }
+.acc-item {
+  padding: 10px 12px; border-radius: 8px; cursor: pointer;
+  transition: background 0.1s; border: 1px solid transparent;
+}
+.acc-item:hover { background: var(--surface); }
+.acc-item.active { background: var(--surface2); border-color: var(--border); }
+.acc-item-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+.acc-item-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.tier-pill {
+  font-size: 10px; font-weight: 600; padding: 1px 6px;
+  border-radius: 3px; font-family: 'DM Mono', monospace;
+}
+.acc-item-industry { font-size: 11px; color: var(--text3); }
+.acc-item-comp { font-size: 10px; color: var(--accent); margin-top: 2px; font-family: 'DM Mono', monospace; }
+
+/* ── Main ── */
+#main {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 760px;
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card-header {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+}
+.card-label { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing: 0.08em; }
+.card-body { padding: 18px; }
+
+/* ── Account header ── */
+#acc-header-card { display: none; }
+#acc-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+#acc-name-text { font-family: 'Instrument Serif', serif; font-size: 22px; letter-spacing: -0.02em; }
+#acc-tier-badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; font-family: 'DM Mono', monospace; }
+#acc-meta { font-size: 12px; color: var(--text2); display: flex; align-items: center; gap: 8px; }
+#acc-website-text { color: var(--text3); font-family: 'DM Mono', monospace; font-size: 11px; }
+#acc-competitor-row { display: none; margin-top: 10px; }
+#acc-competitor-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #1C1917; border: 1px solid #292524;
+  border-radius: 6px; padding: 5px 12px; font-size: 12px;
+}
+#acc-competitor-label { color: #57534E; font-size: 10px; font-family: 'DM Mono', monospace; }
+#acc-competitor-val { color: var(--accent); font-weight: 500; }
+#acc-notes-text { margin-top: 12px; font-size: 12px; color: var(--text2); line-height: 1.65; padding-top: 12px; border-top: 1px solid var(--border); display: none; }
+
+/* ── Input fields ── */
+#contact-form { display: none; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.field-label { font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+.field-input {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 9px 13px; font-size: 13px;
+  color: var(--text); outline: none; transition: border 0.15s;
+  width: 100%;
+}
+.field-input:focus { border-color: var(--accent); }
+.field-input::placeholder { color: var(--text3); }
+textarea.field-input {
+  resize: vertical; min-height: 80px; line-height: 1.6;
+  font-size: 12px;
+}
+textarea.field-input.tall { min-height: 130px; }
+.field-hint { font-size: 11px; color: var(--text3); line-height: 1.5; margin-top: 2px; }
+
+/* ── Generate button ── */
+#btn-generate {
+  width: 100%; background: var(--accent); border: none;
+  border-radius: 9px; padding: 14px; font-size: 14px;
+  font-weight: 600; color: #fff; cursor: pointer;
+  letter-spacing: -0.01em; transition: all 0.15s;
+  margin-top: 4px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+#btn-generate:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(249,115,22,0.3); }
+#btn-generate:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* ── Progress ── */
+#progress-card { display: none; }
+.step-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+.step-row + .step-row { border-top: 1px solid var(--border); }
+.step-dot {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-dot.idle { background: var(--surface2); border: 1px solid var(--border); }
+.step-dot.running { background: #1C1917; border: 1px solid var(--accent); }
+.step-dot.done { background: var(--green-bg); border: 1px solid var(--green); }
+.step-dot.error { background: var(--red-bg); border: 1px solid var(--red); }
+.spinner { width: 10px; height: 10px; border: 1.5px solid var(--accent); border-top-color: transparent; border-radius: 50%; animation: spin 0.7s linear infinite; }
+.step-content { flex: 1; }
+.step-name { font-size: 13px; color: var(--text2); }
+.step-name.active { color: var(--text); }
+.step-detail { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* ── Context summary ── */
+#context-card { display: none; }
+.context-item { display: flex; gap: 10px; padding: 8px 0; }
+.context-item + .context-item { border-top: 1px solid var(--border); }
+.context-key { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; min-width: 90px; padding-top: 2px; }
+.context-val { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ── Email cards ── */
+#emails-section { display: none; }
+.email-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+.email-card-header {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.email-number {
+  display: flex; align-items: center; gap: 8px;
+}
+.email-num-badge {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: var(--text2);
+  font-family: 'DM Mono', monospace;
+}
+.email-num-badge.active { background: rgba(249,115,22,0.15); border-color: rgba(249,115,22,0.4); color: var(--accent); }
+.email-num-label { font-size: 12px; color: var(--text2); font-weight: 500; }
+.email-copy-btns { display: flex; gap: 6px; }
+.btn-copy {
+  border: none; border-radius: 6px; padding: 4px 11px;
+  font-size: 11px; cursor: pointer; transition: all 0.15s;
+  background: var(--surface2); color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-copy:hover { background: var(--border2); color: var(--text); }
+.btn-copy.primary { background: var(--accent); color: #fff; font-weight: 600; }
+.btn-copy.primary:hover { background: var(--accent2); }
+.btn-copy.success { background: var(--green-bg) !important; color: var(--green) !important; border: 1px solid rgba(34,197,94,0.3); }
+.email-subject-bar {
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border);
+  background: #0B1219;
+  display: flex; align-items: center; gap: 10px;
+}
+.email-subj-label { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; }
+.email-subj-text { font-size: 13px; font-weight: 500; color: var(--text); }
+.email-body-text {
+  padding: 18px 20px;
+  font-size: 13.5px; line-height: 1.85;
+  color: #C8D8EA;
+  white-space: pre-wrap;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Regen & error ── */
+#btn-regenerate {
+  display: none; width: 100%;
+  background: transparent; border: 1px solid var(--border);
+  border-radius: 8px; padding: 11px; font-size: 13px;
+  color: var(--text2); cursor: pointer; transition: all 0.15s;
+}
+#btn-regenerate:hover { border-color: var(--accent); color: var(--accent); }
+#error-card { display: none; background: var(--red-bg); border: 1px solid #450A0A; border-radius: 10px; padding: 14px 18px; }
+#error-text { font-size: 13px; color: #FCA5A5; }
+
+/* ── Empty state ── */
+#empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 60px 20px; text-align: center;
+  gap: 12px; color: var(--text3);
+}
+#empty-state .empty-icon { font-size: 32px; opacity: 0.4; }
+#empty-state p { font-size: 13px; line-height: 1.6; max-width: 260px; }
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  #layout { grid-template-columns: 1fr; }
+  #sidebar { display: none; }
+  #main { padding: 20px 16px; }
+}
+</style>
 </head>
 <body>
-<p class="p1"><span class="s1">B</span></p>
-<p class="p2"><span class="s1">Braze Outbound</span></p>
-<p class="p3"><span class="s1">italia</span></p>
-<p class="p4"><span class="s2">⚙</span><span class="s1"> Competitor</span></p>
-<p class="p5"><span class="s3">ACCOUNT</span></p>
-<p class="p6"><span class="s3"></span><br></p>
-<p class="p7"><span class="s3">←</span></p>
-<p class="p8"><span class="s3">Seleziona un account dalla lista per iniziare a costruire la sequenza email</span></p>
+
+<!-- Header -->
+<div id="header">
+  <div id="logo">
+    <div id="logo-mark">B</div>
+    <span id="logo-name">Braze Outbound</span>
+    <span id="logo-tag">italia</span>
+  </div>
+  <div id="header-right">
+    <span id="session-cost"></span>
+    <button id="btn-settings" onclick="toggleSettings()">⚙ Competitor</button>
+  </div>
+</div>
+
+<!-- Settings -->
+<div id="settings-panel">
+  <p id="settings-label">GESTIONE COMPETITOR</p>
+  <div id="competitor-list"></div>
+  <div id="comp-form">
+    <input id="comp-key" class="settings-input" placeholder="Nome account esatto dal CSV">
+    <input id="comp-val-input" class="settings-input" placeholder="Competitor">
+    <button id="btn-add-comp" onclick="addCompetitor()">+ Aggiungi</button>
+  </div>
+</div>
+
+<!-- Layout -->
+<div id="layout">
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <p id="search-label">ACCOUNT</p>
+    <div id="search-wrap">
+      <input id="search-input" placeholder="Cerca account..." oninput="onSearch(this.value)" autocomplete="off">
+      <button id="btn-clear" onclick="clearSearch()">×</button>
+    </div>
+    <div id="account-list"></div>
+  </div>
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- Empty state -->
+    <div id="empty-state">
+      <div class="empty-icon">←</div>
+      <p>Seleziona un account dalla lista per iniziare a costruire la sequenza email</p>
+    </div>
+
+    <!-- Account header -->
+    <div id="acc-header-card" class="card">
+      <div class="card-body">
+        <div id="acc-title-row">
+          <span id="acc-name-text"></span>
+          <span id="acc-tier-badge" class="tier-pill"></span>
+        </div>
+        <div id="acc-meta">
+          <span id="acc-industry-text"></span>
+          <span id="acc-website-text"></span>
+        </div>
+        <div id="acc-competitor-row">
+          <div id="acc-competitor-badge">
+            <span id="acc-competitor-label">COMPETITOR</span>
+            <span id="acc-competitor-val"></span>
+          </div>
+        </div>
+        <p id="acc-notes-text"></p>
+      </div>
+    </div>
+
+    <!-- Contact form -->
+    <div id="contact-form" class="card">
+      <div class="card-header">
+        <span class="card-label">CONTATTO & CONTESTO</span>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="field-label">NOME COGNOME *</label>
+            <input id="f-name" class="field-input" placeholder="es. Marco Rossi" required>
+          </div>
+          <div class="form-group">
+            <label class="field-label">RUOLO *</label>
+            <input id="f-title" class="field-input" placeholder="es. Head of CRM" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="field-label">PROFILO LINKEDIN <span style="color:var(--text3)">(opzionale)</span></label>
+            <textarea id="f-linkedin" class="field-input tall" placeholder="Incolla qui il testo del profilo LinkedIn — about, esperienze, post recenti. Più informazioni dai, più l'hook sarà personalizzato. Lascia vuoto se non hai tempo."></textarea>
+            <p class="field-hint">Vai sul profilo LinkedIn → seleziona tutto il testo → copia → incolla qui</p>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label class="field-label">NOTE DINAMICHE <span style="color:var(--text3)">(opzionale)</span></label>
+            <textarea id="f-notes" class="field-input" placeholder="es. Hanno appena assunto un nuovo CMO. Ci siamo già parlati a marzo. Stanno valutando un replatforming CRM. Partecipano a CRM Forum a giugno."></textarea>
+          </div>
+        </div>
+
+        <button id="btn-generate" onclick="generate()">
+          <span>Genera sequenza email</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div id="progress-card" class="card">
+      <div class="card-header"><span class="card-label">GENERAZIONE IN CORSO</span></div>
+      <div class="card-body" id="steps-container"></div>
+    </div>
+
+    <!-- Context summary -->
+    <div id="context-card" class="card fadeUp">
+      <div class="card-header"><span class="card-label">CONTESTO UTILIZZATO</span></div>
+      <div class="card-body" id="context-container"></div>
+    </div>
+
+    <!-- Emails -->
+    <div id="emails-section" class="fadeUp">
+
+      <div class="email-card" id="email1-card">
+        <div class="email-card-header">
+          <div class="email-number">
+            <div class="email-num-badge active">1</div>
+            <span class="email-num-label">Prima email — Hook & Pain Point</span>
+          </div>
+          <div class="email-copy-btns">
+            <button class="btn-copy" onclick="copyEmail('e1-subj', this)">Oggetto</button>
+            <button class="btn-copy" onclick="copyEmail('e1-body', this)">Corpo</button>
+            <button class="btn-copy primary" onclick="copyEmail('e1-all', this)">Copia tutto</button>
+          </div>
+        </div>
+        <div class="email-subject-bar">
+          <span class="email-subj-label">OGG:</span>
+          <span class="email-subj-text" id="e1-subject"></span>
+        </div>
+        <div class="email-body-text" id="e1-body"></div>
+      </div>
+
+      <div class="email-card" id="email2-card">
+        <div class="email-card-header">
+          <div class="email-number">
+            <div class="email-num-badge">2</div>
+            <span class="email-num-label">Secondo email — Soluzione & CTA</span>
+          </div>
+          <div class="email-copy-btns">
+            <button class="btn-copy" onclick="copyEmail('e2-subj', this)">Oggetto</button>
+            <button class="btn-copy" onclick="copyEmail('e2-body', this)">Corpo</button>
+            <button class="btn-copy primary" onclick="copyEmail('e2-all', this)">Copia tutto</button>
+          </div>
+        </div>
+        <div class="email-subject-bar">
+          <span class="email-subj-label">OGG:</span>
+          <span class="email-subj-text" id="e2-subject"></span>
+        </div>
+        <div class="email-body-text" id="e2-body"></div>
+      </div>
+
+    </div>
+
+    <button id="btn-regenerate" onclick="generate()">↺ Rigenera sequenza</button>
+    <div id="error-card"><p id="error-text"></p></div>
+
+  </div>
+</div>
+
+<script>
+// ── Dati ──────────────────────────────────────────────────────────────────────
+const ACCOUNTS = [
+  { name: "McDonald's Italy", industry: "Restaurants", tier: "A", website: "mcdonalds.it", notes: "Global QSR giant with app-based ordering, loyalty program, and millions of Italian customers. Top ICP." },
+  { name: "Librerie Feltrinelli", industry: "Specialty retail", tier: "A", website: "lafeltrinelli.it", notes: "Bookstores with e-commerce and apps. ICP for push, loyalty, cultural engagement, and events." },
+  { name: "Casa.it", industry: "Proptech", tier: "A", website: "casa.it", notes: "Proptech with a powerful app. ICP for pushing new listings and engaging buyers." },
+  { name: "Vivaticket", industry: "Custom Software & IT Services", tier: "A", website: "vivaticket.com", notes: "" },
+  { name: "WYCON cosmetics", industry: "Cosmetics, Beauty & Personal Care", tier: "A", website: "wyconcosmetics.com", notes: "Italian cosmetics brand with 200+ stores, e-commerce, and loyalty program (WYCON Squad)." },
+  { name: "Starhotels", industry: "Hotels", tier: "A", website: "starhotels.com", notes: "Italy's #1 hotel group. 31 upscale properties, booking app, loyalty program." },
+  { name: "Lega Serie A", industry: "Sports", tier: "A", website: "legaseriea.it", notes: "Governing body of Italian top-flight football with app, streaming platform, and massive audience." },
+  { name: "Miroglio Fashion", industry: "Apparel & Accessories", tier: "A", website: "mirogliofashion.com", notes: "€398M, 5M+ customers, e-commerce growing. CRM investment confirmed. Tealium already there." },
+  { name: "Sorgenia", industry: "Energy & Utilities", tier: "A", website: "sorgenia.it", notes: "Digital energy utility with B2C app. ICP for onboarding, bill/consumption push, engagement." },
+  { name: "Mooney", industry: "Banking", tier: "A", website: "mooneygroup.it", notes: "Big B2C Business with 1.5M MAU. Big potential on +2 apps." },
+  { name: "Mavriq | Gruppo MOL", industry: "Banking", tier: "A", website: "gruppomol.it", notes: "Direct competitor of Facile.it. We lost an RFP Opportunity end of 2023." },
+  { name: "FC Internazionale Milano", industry: "Digital Media, Streaming, and Sports", tier: "A", website: "inter.it", notes: "Top football club with app, membership, and global fan base. Excellent ICP." },
+  { name: "Joivy", industry: "Consumer Software - Lifestyle", tier: "A", website: "joivy.com", notes: "Italian proptech — €110M revenue, 200K annual tenants, dedicated app. Strongest proptech ICP." },
+  { name: "Euronics", industry: "Specialty retail", tier: "A", website: "euronics.it", notes: "Consumer electronics retail with an app and large customer base. Strong ICP." },
+  { name: "Ermenegildo Zegna", industry: "Luxury", tier: "A", website: "zegnagroup.com", notes: "Global luxury menswear brand listed on NYSE, DTC e-commerce, and app." },
+  { name: "Iliad Italia", industry: "Telephone & Wireless", tier: "A", website: "iliad.it", notes: "Telco challenger with B2C apps and millions of subscribers." },
+  { name: "Telepass", industry: "Banking", tier: "A", website: "telepass.com", notes: "B2C app with millions of active users, expanding mobility services. Excellent ICP." },
+  { name: "Snaitech", industry: "Leisure & Recreation", tier: "A", website: "snaitech.it", notes: "Gambling/betting with apps and millions of users. Push, in-app, massive retention. Top ICP." },
+  { name: "Illimity", industry: "Banking", tier: "A", website: "illimity.com", notes: "Neobank digitale con app. ICP per onboarding e engagement clienti." },
+  { name: "SKS365 Group GmbH", industry: "Digital Media, Streaming, and Sports", tier: "A", website: "sks365.com", notes: "Part of an Enterprise Account (Gamenet aka Lottomatica)." },
+  { name: "MioDottore", industry: "Business Software", tier: "B", website: "miodottore.it", notes: "Solid Italian revenue, real Braze use cases." },
+  { name: "Acqua Di Parma", industry: "Cosmetics, Beauty & Personal Care", tier: "B", website: "acquadiparma.com", notes: "LVMH-owned Italian luxury fragrance brand with DTC e-commerce." },
+  { name: "ProntoPro", industry: "Business Services", tier: "B", website: "prontopro.it", notes: "B2C services marketplace with apps." },
+  { name: "SSC Napoli", industry: "Digital Media, Streaming, and Sports", tier: "B", website: "sscnapoli.it", notes: "Major Serie A club with app, massive global fan base, e-commerce." },
+  { name: "De'Longhi Group", industry: "Industrials", tier: "B", website: "delonghi.it", notes: "Consumer electronics with connected appliances apps." },
+  { name: "S.S. Lazio", industry: "Digital Media, Streaming, and Sports", tier: "B", website: "sslazio.it", notes: "Major Serie A club with app, massive fan base, e-commerce." },
+  { name: "Banca Widiba", industry: "Banking", tier: "B", website: "widiba.it", notes: "Digital bank of Gruppo MPS with 264K+ customers, full-featured app with AI integration." },
+  { name: "ho.Mobile", industry: "Telephone & Wireless", tier: "B", website: "ho-mobile.it", notes: "Low-cost MVNO brand of Vodafone/Fastweb with millions of subscribers." },
+  { name: "Multiversity", industry: "Education Technology", tier: "B", website: "multiversity.it", notes: "Italian digital university group with app and 200K+ students." },
+  { name: "VERALAB", industry: "Cosmetics, Beauty & Personal Care", tier: "B", website: "veralab.it", notes: "Fast-growing Italian skincare brand, strong DTC e-commerce." },
+  { name: "Banca Profilo / Tinaba", industry: "Payments", tier: "B", website: "tinaba.it", notes: "Fintech super-app: payments, savings, crypto. App-native." },
+  { name: "ConTe.it", industry: "Insurance", tier: "B", website: "conte.it", notes: "Direct-to-consumer car insurer, 1M+ Italian customers, app." },
+  { name: "musiXmatch", industry: "Digital Media, Streaming, and Sports", tier: "B", website: "musixmatch.com", notes: "Music app with tens of millions of global users." },
+  { name: "Luisaviaroma", industry: "Apparel & Accessories", tier: "B", website: "luisaviaroma.com", notes: "Luxury multi-brand fashion e-commerce. Went with MoEngage in 2022 — time to re-engage." },
+  { name: "Cortilia", industry: "Business Software", tier: "B", website: "cortilia.it", notes: "Ecommerce grocery delivery with app." },
+  { name: "AS Roma", industry: "Digital Media, Streaming, and Sports", tier: "B", website: "asroma.com", notes: "Major Serie A club with app, massive fan base, e-commerce." },
+  { name: "ACF Fiorentina", industry: "Sports", tier: "B", website: "acffiorentina.it", notes: "Major Serie A club with app, massive fan base, e-commerce." },
+  { name: "BeRebel", industry: "Insurance", tier: "B", website: "berebel.it", notes: "Italian insurtech with pay-per-use car insurance model and app." },
+  { name: "Caffè Borbone", industry: "Food & Drink", tier: "C", website: "caffeborbone.it", notes: "Italian coffee brand with strong DTC e-commerce, subscription-friendly." },
+  { name: "MISCUSI", industry: "Restaurants", tier: "C", website: "miscusi.com", notes: "Italian pasta restaurant chain with app and loyalty program. Currently with Bloomreach." },
+  { name: "Liu Jo", industry: "Apparel & Accessories", tier: "C", website: "liujo.com", notes: "Fashion with strong eCommerce and apps." },
+  { name: "Venchi", industry: "Business Services", tier: "C", website: "venchi.com", notes: "Chocolate luxury retail with loyalty app." },
+  { name: "Tannico", industry: "Restaurants", tier: "C", website: "tannico.it", notes: "Leading Italian online wine e-commerce with app." },
+  { name: "Atalanta B.C.", industry: "Digital Media, Streaming, and Sports", tier: "C", website: "atalanta.it", notes: "Major Serie A club with good fan base, e-commerce." },
+];
+
+const TIER_COLOR = { A: "#22C55E", B: "#F59E0B", C: "#94A3B8" };
+const TIER_BG    = { A: "#052E16", B: "#451A03", C: "#1E293B" };
+
+let competitors = {
+  "FC Internazionale Milano": "Salesforce Marketing Cloud",
+  "Telepass": "Salesforce Marketing Cloud",
+  "Liu Jo": "Salesforce Marketing Cloud",
+  "Sorgenia": "Microsoft Dynamics 365",
+  "Mavriq | Gruppo MOL": "MAPP",
+  "MISCUSI": "Bloomreach",
+  "Miroglio Fashion": "Tealium",
+  "Luisaviaroma": "MoEngage",
+};
+
+let selectedAccount = null;
+let sessionCost = 0;
+let lastEmails = { e1: { subject: '', body: '' }, e2: { subject: '', body: '' } };
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() { renderSidebar(ACCOUNTS); });
+
+function renderSidebar(list) {
+  const el = document.getElementById('account-list');
+  el.innerHTML = list.map(acc => {
+    const comp = competitors[acc.name] || null;
+    return `<div class="acc-item ${selectedAccount?.name === acc.name ? 'active' : ''}" onclick="selectAccount('${acc.name.replace(/'/g,"\\'")}')">
+      <div class="acc-item-top">
+        <span class="acc-item-name">${acc.name}</span>
+        <span class="tier-pill" style="color:${TIER_COLOR[acc.tier]};background:${TIER_BG[acc.tier]}">T${acc.tier}</span>
+      </div>
+      <div class="acc-item-industry">${acc.industry}</div>
+      ${comp ? `<div class="acc-item-comp">⚠ ${comp}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+function onSearch(val) {
+  document.getElementById('btn-clear').style.display = val ? 'block' : 'none';
+  const filtered = val.length < 1
+    ? ACCOUNTS
+    : ACCOUNTS.filter(a =>
+        a.name.toLowerCase().includes(val.toLowerCase()) ||
+        a.industry.toLowerCase().includes(val.toLowerCase())
+      );
+  renderSidebar(filtered);
+}
+
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  document.getElementById('btn-clear').style.display = 'none';
+  renderSidebar(ACCOUNTS);
+}
+
+// ── Select account ────────────────────────────────────────────────────────────
+function selectAccount(name) {
+  selectedAccount = ACCOUNTS.find(a => a.name === name);
+  renderSidebar(ACCOUNTS.filter(a =>
+    document.getElementById('search-input').value.length < 1 ? true :
+    a.name.toLowerCase().includes(document.getElementById('search-input').value.toLowerCase())
+  ));
+
+  const comp = competitors[selectedAccount.name] || null;
+
+  // Account header
+  document.getElementById('empty-state').style.display = 'none';
+  const hCard = document.getElementById('acc-header-card');
+  hCard.style.display = 'block';
+  hCard.classList.add('fadeUp');
+
+  document.getElementById('acc-name-text').textContent = selectedAccount.name;
+  const tb = document.getElementById('acc-tier-badge');
+  tb.textContent = `Tier ${selectedAccount.tier}`;
+  tb.style.color = TIER_COLOR[selectedAccount.tier];
+  tb.style.background = TIER_BG[selectedAccount.tier];
+  document.getElementById('acc-industry-text').textContent = selectedAccount.industry;
+  document.getElementById('acc-website-text').textContent = selectedAccount.website || '';
+
+  const compRow = document.getElementById('acc-competitor-row');
+  if (comp) {
+    compRow.style.display = 'block';
+    document.getElementById('acc-competitor-val').textContent = comp;
+  } else { compRow.style.display = 'none'; }
+
+  const notesEl = document.getElementById('acc-notes-text');
+  if (selectedAccount.notes) {
+    notesEl.textContent = selectedAccount.notes;
+    notesEl.style.display = 'block';
+  } else { notesEl.style.display = 'none'; }
+
+  // Show form
+  const form = document.getElementById('contact-form');
+  form.style.display = 'block';
+  form.classList.add('fadeUp');
+
+  // Reset output
+  hideOutput();
+
+  // Clear form
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-linkedin').value = '';
+  document.getElementById('f-notes').value = '';
+  document.getElementById('f-name').focus();
+}
+
+function hideOutput() {
+  document.getElementById('progress-card').style.display = 'none';
+  document.getElementById('context-card').style.display = 'none';
+  document.getElementById('emails-section').style.display = 'none';
+  document.getElementById('btn-regenerate').style.display = 'none';
+  document.getElementById('error-card').style.display = 'none';
+}
+
+// ── Settings ──────────────────────────────────────────────────────────────────
+function toggleSettings() {
+  const p = document.getElementById('settings-panel');
+  p.style.display = p.style.display === 'block' ? 'none' : 'block';
+  renderCompetitorList();
+}
+
+function renderCompetitorList() {
+  document.getElementById('competitor-list').innerHTML = Object.entries(competitors).map(([k,v]) =>
+    `<div class="comp-tag">
+      <span class="comp-name">${k}</span>
+      <span class="comp-arrow">→</span>
+      <span class="comp-val">${v}</span>
+      <button class="comp-del" onclick="removeCompetitor('${k}')">×</button>
+    </div>`
+  ).join('');
+}
+
+function addCompetitor() {
+  const k = document.getElementById('comp-key').value.trim();
+  const v = document.getElementById('comp-val-input').value.trim();
+  if (k && v) {
+    competitors[k] = v;
+    document.getElementById('comp-key').value = '';
+    document.getElementById('comp-val-input').value = '';
+    renderCompetitorList();
+    if (selectedAccount) renderSidebar(ACCOUNTS);
+  }
+}
+
+function removeCompetitor(k) {
+  delete competitors[k];
+  renderCompetitorList();
+  renderSidebar(ACCOUNTS);
+}
+
+// ── Steps ─────────────────────────────────────────────────────────────────────
+const STEPS = [
+  { key: 'news',    label: 'Ricerca notizie CX/CRM con web search' },
+  { key: 'profile', label: 'Analisi profilo contatto' },
+  { key: 'emails',  label: 'Scrittura sequenza 2 email' },
+];
+
+function setStepStatus(steps) {
+  const container = document.getElementById('steps-container');
+  container.innerHTML = steps.map(s => `
+    <div class="step-row">
+      <div class="step-dot ${s.status}">
+        ${s.status === 'running' ? '<div class="spinner"></div>'
+          : s.status === 'done' ? '<span style="font-size:11px;color:var(--green)">✓</span>'
+          : s.status === 'error' ? '<span style="font-size:11px;color:var(--red)">✗</span>'
+          : '<span style="font-size:11px;color:var(--text3)">·</span>'}
+      </div>
+      <div class="step-content">
+        <div class="step-name ${s.status === 'running' ? 'active' : ''}">${s.label}</div>
+        ${s.detail ? `<div class="step-detail">${s.detail}</div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+// ── Generate ──────────────────────────────────────────────────────────────────
+async function generate() {
+  if (!selectedAccount) return;
+
+  const name = document.getElementById('f-name').value.trim();
+  const title = document.getElementById('f-title').value.trim();
+  if (!name || !title) {
+    document.getElementById('f-name').focus();
+    document.getElementById('f-name').style.borderColor = '#F97316';
+    setTimeout(() => document.getElementById('f-name').style.borderColor = '', 2000);
+    return;
+  }
+
+  hideOutput();
+  document.getElementById('btn-generate').disabled = true;
+
+  const progressCard = document.getElementById('progress-card');
+  progressCard.style.display = 'block';
+
+  const steps = STEPS.map(s => ({ ...s, status: 'idle' }));
+
+  // Step 1 running
+  steps[0].status = 'running';
+  setStepStatus(steps);
+
+  try {
+    const payload = {
+      account: {
+        name: selectedAccount.name,
+        industry: selectedAccount.industry,
+        website: selectedAccount.website,
+        notes: selectedAccount.notes,
+        competitor: competitors[selectedAccount.name] || null
+      },
+      contact: {
+        name,
+        title,
+        linkedinText: document.getElementById('f-linkedin').value.trim()
+      },
+      dynamicNotes: document.getElementById('f-notes').value.trim()
+    };
+
+    const response = await fetch('/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) throw new Error(`Errore server: ${response.status}`);
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+
+    // Step 1 done, step 2
+    steps[0].status = 'done';
+    steps[0].detail = data.context?.hook ? data.context.hook.slice(0, 70) + '...' : 'Notizie raccolte';
+    steps[1].status = payload.contact.linkedinText ? 'running' : 'done';
+    steps[1].detail = payload.contact.linkedinText ? '' : 'Profilo non fornito — skip';
+    setStepStatus(steps);
+
+    if (payload.contact.linkedinText) {
+      await sleep(300);
+      steps[1].status = 'done';
+      steps[1].detail = data.context?.use_lei ? 'Seniority alta → uso del Lei' : `${data.context?.years_exp || '?'} anni exp → uso del tu`;
+      setStepStatus(steps);
+    }
+
+    // Step 3
+    steps[2].status = 'running';
+    setStepStatus(steps);
+    await sleep(200);
+    steps[2].status = 'done';
+    steps[2].detail = 'Sequenza pronta';
+    setStepStatus(steps);
+
+    // Costo
+    sessionCost += data.cost || 0;
+    const costEl = document.getElementById('session-cost');
+    costEl.style.display = 'block';
+    costEl.textContent = `sessione: $${sessionCost.toFixed(4)}`;
+
+    // Context card
+    if (data.context) {
+      const ctx = data.context;
+      const items = [
+        ctx.hook && { key: 'HOOK', val: ctx.hook },
+        ctx.pain_point && { key: 'PAIN POINT', val: ctx.pain_point },
+        ctx.use_lei !== undefined && { key: 'FORMALITÀ', val: ctx.use_lei ? '👔 Lei (seniority elevata)' : '💬 Tu (professionista mid)' },
+        ctx.personal_hook && { key: 'HOOK PERSONALE', val: ctx.personal_hook },
+      ].filter(Boolean);
+
+      document.getElementById('context-container').innerHTML = items.map(i =>
+        `<div class="context-item">
+          <span class="context-key">${i.key}</span>
+          <span class="context-val">${i.val}</span>
+        </div>`
+      ).join('');
+      document.getElementById('context-card').style.display = 'block';
+    }
+
+    // Emails
+    lastEmails = {
+      e1: data.email1,
+      e2: data.email2
+    };
+
+    document.getElementById('e1-subject').textContent = data.email1.subject;
+    document.getElementById('e1-body').textContent = data.email1.body;
+    document.getElementById('e2-subject').textContent = data.email2.subject;
+    document.getElementById('e2-body').textContent = data.email2.body;
+
+    document.getElementById('emails-section').style.display = 'block';
+    document.getElementById('btn-regenerate').style.display = 'block';
+
+  } catch (err) {
+    steps.forEach(s => { if (s.status === 'running') s.status = 'error'; });
+    setStepStatus(steps);
+    document.getElementById('error-text').textContent = `Errore: ${err.message}`;
+    document.getElementById('error-card').style.display = 'block';
+  }
+
+  document.getElementById('btn-generate').disabled = false;
+}
+
+// ── Copy ──────────────────────────────────────────────────────────────────────
+async function copyEmail(type, btn) {
+  let text = '';
+  if (type === 'e1-subj') text = lastEmails.e1.subject;
+  else if (type === 'e1-body') text = lastEmails.e1.body;
+  else if (type === 'e1-all') text = `OGGETTO: ${lastEmails.e1.subject}\n\n${lastEmails.e1.body}`;
+  else if (type === 'e2-subj') text = lastEmails.e2.subject;
+  else if (type === 'e2-body') text = lastEmails.e2.body;
+  else if (type === 'e2-all') text = `OGGETTO: ${lastEmails.e2.subject}\n\n${lastEmails.e2.body}`;
+
+  await navigator.clipboard.writeText(text);
+  const orig = btn.textContent;
+  btn.classList.add('success');
+  btn.textContent = '✓';
+  setTimeout(() => { btn.classList.remove('success'); btn.textContent = orig; }, 2000);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+</script>
 </body>
 </html>
