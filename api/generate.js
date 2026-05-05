@@ -5,7 +5,7 @@ module.exports = async function handler(req, res) {
 
   try {
     // ── Step 1: Notizie rilevanti con web search ────────────────────────────
-    const newsResponse = await callAnthropic({
+    const newsResponse = await callAnthropic({ model: 'claude-haiku-4-5-20251001',
       system: 'Sei un ricercatore specializzato in customer experience e marketing digitale. Rispondi SOLO con JSON valido, zero testo extra.',
       prompt: `Cerca notizie e informazioni recenti su ${account.name} (${account.website}) focalizzandoti su:
 - Strategie di customer experience, CX, customer engagement
@@ -45,7 +45,7 @@ Rispondi con:
     let profileCost = 0;
 
     if (hasProfile) {
-      const profileResponse = await callAnthropic({
+      const profileResponse = await callAnthropic({ model: 'claude-haiku-4-5-20251001',
         system: 'Sei un esperto di sales intelligence. Rispondi SOLO con JSON valido, zero testo extra.',
         prompt: `Analizza questo profilo LinkedIn e estrai le informazioni rilevanti per un outbound sales B2B.
 
@@ -97,7 +97,7 @@ PROFILO CONTATTO:
 - Hook personale: ${profile.personal_hook || 'non disponibile'}`
       : '';
 
-    const emailResponse = await callAnthropic({
+    const emailResponse = await callAnthropic({ model: 'claude-sonnet-4-5-20250514',
       system: `Sei un BDR di Braze (www.braze.com) specializzato in outbound B2B per il mercato italiano. Braze è una Customer Engagement Platform (CEP) che permette ai brand di orchestrare comunicazioni personalizzate cross-canale (push, email, in-app, SMS, WhatsApp) in real-time basate sul comportamento degli utenti.
 
 ${formalityNote}
@@ -193,9 +193,9 @@ EMAIL_2_BODY:
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-async function callAnthropic({ system, prompt, useWebSearch = false }) {
+async function callAnthropic({ system, prompt, useWebSearch = false, model = 'claude-haiku-4-5-20251001' }) {
   const body = {
-    model: 'claude-sonnet-4-5',
+    model: model,
     max_tokens: 1500,
     system,
     messages: [{ role: 'user', content: prompt }]
